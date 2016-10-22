@@ -1,13 +1,20 @@
 package bysong.app.domain;
 
+import org.parceler.Parcel;
+
 /**
  * Created by Lucas on 14/08/2016.
  */
+@Parcel
 public class Artist {
 
     private String artistName;
     private String imageFileArtist;
     private int imageFileArtistID;
+
+    public Artist() {
+
+    }
 
     public Artist(String artistName, int imageFileArtistID) {
 

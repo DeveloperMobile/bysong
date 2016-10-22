@@ -1,15 +1,22 @@
 package bysong.app.domain;
 
+import org.parceler.Parcel;
+
 import java.util.List;
 
 /**
  * Created by Lucas on 14/08/2016.
  */
+@Parcel
 public class Word {
 
     public String writing;
     public Language language;
     public List<Word> wordsTranslationList;
+
+    public Word() {
+
+    }
 
     public Word(String writing, Language language) {
 

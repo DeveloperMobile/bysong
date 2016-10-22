@@ -1,10 +1,13 @@
 package bysong.app.domain;
 
+import org.parceler.Parcel;
+
 import java.util.List;
 
 /**
  * Created by Lucas on 14/08/2016.
  */
+@Parcel
 public class Verse {
 
     private int iiVerseNumber;
@@ -15,6 +18,9 @@ public class Verse {
     public List<Word> WordsList;
     public List<Verse> BasicTranslations;
 
+    public Verse() {
+
+    }
 
     public Verse(int aiVerseNumber, List<Word> aoWordsList, int aiStartTime, int aiEndTime) {
         iiVerseNumber = aiVerseNumber;

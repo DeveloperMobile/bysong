@@ -20,7 +20,9 @@ public class MusicaActivity extends BaseActivity {
 
         if (savedInstanceState == null) {
 
-            getSupportFragmentManager().beginTransaction().add(R.id.musica_fragment, new MusicaFragment()).commit();
+            MusicaFragment frag = new MusicaFragment();
+            frag.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction().add(R.id.musica_fragment, frag).commit();
 
         }
 

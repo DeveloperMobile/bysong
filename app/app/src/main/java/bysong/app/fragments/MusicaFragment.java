@@ -3,6 +3,7 @@ package bysong.app.fragments;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,10 +13,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.parceler.Parcel;
+import org.parceler.Parcels;
+
 import java.io.IOException;
 
 import bysong.app.R;
 import bysong.app.domain.PlayerMp3;
+import bysong.app.domain.Song;
 
 /**
  * Created by Tiago on 09/09/2016.
@@ -34,10 +39,9 @@ public class MusicaFragment extends Fragment implements MediaPlayer.OnPreparedLi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_musica, container, false);
+        Song song = Parcels.unwrap(getArguments().getParcelable("verso"));
         letra = (TextView) view.findViewById(R.id.letra);
-        btn_tocar_musica = (Button) view.findViewById(R.id.btn_tocar_trecho_musica);
-        btn_tocar_musica.setOnClickListener(onClickTocar());
-        tocarMusica();
+        letra.setText(song.getVersesList().getList().get(0).getOriginalWriting());
         return view;
 
     }

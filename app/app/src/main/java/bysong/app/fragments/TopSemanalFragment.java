@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.parceler.Parcels;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -126,6 +128,16 @@ public class TopSemanalFragment extends Fragment implements MediaPlayer.OnPrepar
             public void onClickTrecho(SongsAdapter.SongsViewHolder holder, int id) {
 
                 startActivity(new Intent(getContext(), MusicaActivity.class));
+
+            }
+
+            @Override
+            public void onClickItem(SongsAdapter.SongsViewHolder holder, int id) {
+
+                Song song = songs.get(id);
+                Intent intent = new Intent(getContext(), MusicaActivity.class);
+                intent.putExtra("verso", Parcels.wrap(song));
+                startActivity(intent);
 
             }
 

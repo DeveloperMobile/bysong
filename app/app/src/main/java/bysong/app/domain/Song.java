@@ -1,21 +1,25 @@
 package bysong.app.domain;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import bysong.app.R;
+import bysong.app.activity.ListVerse;
 
 /**
  * Created by Tiago on 11/08/2016.
  * Classe de domínio Song
  */
+@Parcel
 public class Song {
 
     private String songCode;
     private String fileNameMp3;
     private String title;
     private int allViewsCount;
-    public List<Verse> versesList;
+    public ListVerse listVerse;
     private Artist artist;
     private int songRankStatus; // Atributo ioSongRankStatus alterado de SongRankStatus para int
 
@@ -24,13 +28,13 @@ public class Song {
     public Song() {}
 
     public Song(String songCode, String fileNameMp3, String title, int allViewsCount,
-                List<Verse> versesList, Artist artist, int songRankStatus) {
+                ListVerse listVerse, Artist artist, int songRankStatus) {
 
         this.songCode = songCode;
         this.fileNameMp3 = fileNameMp3;
         this.title = title;
         this.allViewsCount = allViewsCount;
-        this.versesList = versesList;
+        this.listVerse = listVerse;
         this.artist = artist;
         this.songRankStatus = songRankStatus;
 
@@ -68,12 +72,12 @@ public class Song {
         this.allViewsCount = allViewsCount;
     }
 
-    public List<Verse> getVersesList() {
-        return versesList;
+    public ListVerse getVersesList() {
+        return listVerse;
     }
 
-    public void setVersesList(List<Verse> versesList) {
-        this.versesList = versesList;
+    public void setVersesList(ListVerse listVerse) {
+        this.listVerse = listVerse;
     }
 
     public Artist getArtist() {

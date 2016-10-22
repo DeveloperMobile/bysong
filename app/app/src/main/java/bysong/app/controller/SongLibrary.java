@@ -1,9 +1,12 @@
 package bysong.app.controller;
 
+import android.widget.ListView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import bysong.app.R;
+import bysong.app.activity.ListVerse;
 import bysong.app.domain.*;
 
 /**
@@ -24,17 +27,20 @@ public class SongLibrary {
         loWordsList.add(new Word("test", Language.english));
 
 
-        aoSong.versesList = new ArrayList<Verse>();
-        aoSong.versesList.add(new Verse(1, loWordsList, 1000, 10000));
-        aoSong.versesList.add(new Verse(2, loWordsList, 11000, 20000));
-        aoSong.versesList.add(new Verse(3, loWordsList, 21000, 30000));
-        aoSong.versesList.add(new Verse(4, loWordsList, 31000, 40000));
-        aoSong.versesList.add(new Verse(5, loWordsList, 41000, 50000));
-        aoSong.versesList.add(new Verse(6, loWordsList, 51000, 60000));
-        aoSong.versesList.add(new Verse(7, loWordsList, 61000, 70000));
-        aoSong.versesList.add(new Verse(8, loWordsList, 71000, 80000));
-        aoSong.versesList.add(new Verse(9, loWordsList, 81000, 90000));
-        aoSong.versesList.add(new Verse(10, loWordsList, 91000, 100000));
+        List<Verse> versesList = new ArrayList<Verse>();
+        versesList.add(new Verse(1, loWordsList, 1000, 10000));
+        versesList.add(new Verse(2, loWordsList, 11000, 20000));
+        versesList.add(new Verse(3, loWordsList, 21000, 30000));
+        versesList.add(new Verse(4, loWordsList, 31000, 40000));
+        versesList.add(new Verse(5, loWordsList, 41000, 50000));
+        versesList.add(new Verse(6, loWordsList, 51000, 60000));
+        versesList.add(new Verse(7, loWordsList, 61000, 70000));
+        versesList.add(new Verse(8, loWordsList, 71000, 80000));
+        versesList.add(new Verse(9, loWordsList, 81000, 90000));
+        versesList.add(new Verse(10, loWordsList, 91000, 100000));
+        ListVerse listVerse = new ListVerse();
+        listVerse.setList(versesList);
+        aoSong.setVersesList(listVerse);
 
     }
 

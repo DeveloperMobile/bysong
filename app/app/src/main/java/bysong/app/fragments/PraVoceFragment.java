@@ -1,5 +1,6 @@
 package bysong.app.fragments;
 
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -13,10 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.parceler.Parcels;
+
 import java.io.IOException;
 import java.util.List;
 
 import bysong.app.R;
+import bysong.app.activity.MusicaActivity;
 import bysong.app.adapter.SongsAdapter;
 import bysong.app.controller.SongLibrary;
 import bysong.app.domain.PlayerMp3;
@@ -119,6 +123,16 @@ public class PraVoceFragment extends Fragment {
             @Override
             public void onClickTrecho(SongsAdapter.SongsViewHolder holder, int id) {
                 
+            }
+
+            @Override
+            public void onClickItem(SongsAdapter.SongsViewHolder holder, int id) {
+
+                Song song = songs.get(id);
+                Intent intent = new Intent(getContext(), MusicaActivity.class);
+                intent.putExtra("verso", Parcels.wrap(song));
+                startActivity(intent);
+
             }
 
         };
