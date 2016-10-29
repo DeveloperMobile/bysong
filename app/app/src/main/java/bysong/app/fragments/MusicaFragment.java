@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.parceler.Parcel;
@@ -21,29 +22,52 @@ import java.io.IOException;
 import bysong.app.R;
 import bysong.app.domain.PlayerMp3;
 import bysong.app.domain.Song;
+import bysong.app.visualControls.TextViewAnimated;
+
+import static bysong.app.R.id.tvSongVerse;
 
 /**
  * Created by Tiago on 09/09/2016.
  */
-public class MusicaFragment extends Fragment implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
+public class MusicaFragment extends Fragment implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener,
+        TextViewAnimated.OnTextFinishedListener{
 
     private static final String TAG = "songplayer";
 
-    private TextView letra;
-    private Button btn_tocar_musica;
+    private TextViewAnimated letra;
+    //private Button btn_tocar_musica;
+    private EditText etCompleteVerse;
     private PlayerMp3 playerMp3;
     private boolean isPlaying;
+    private Song song;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_musica, container, false);
-        Song song = Parcels.unwrap(getArguments().getParcelable("verso"));
-        letra = (TextView) view.findViewById(R.id.letra);
-        letra.setText(song.getVersesList().getList().get(0).getOriginalWriting());
+        song = Parcels.unwrap(getArguments().getParcelable("verso"));
+        etCompleteVerse = (EditText) view.findViewById(R.id.etCompleteVerse);
+        letra = (TextViewAnimated) view.findViewById(R.id.letra);
+        tutorialFromBobMarley();
         return view;
 
+    }
+
+    private void tutorialFromBobMarley() {
+
+        PlayerMp3 playerPreview = new PlayerMp3(this.getContext());
+        playerPreview.playLocalFile(R.raw.bob_marley_is_this_love, song.getVersesList().getList().get(0).getIiStartTime(),
+                song.getVersesList().getList().get(0).getIiEndTime());
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        letra.setDelay(300);
+        letra.showTextWordByWord(song.getVersesList().getList().get(0).getOriginalWriting(), this);
     }
 
     private void tocarMusica() {
@@ -67,7 +91,7 @@ public class MusicaFragment extends Fragment implements MediaPlayer.OnPreparedLi
         playerMp3.stop();
         playerMp3.killMyInstance();
         letra.setVisibility(View.VISIBLE);
-        btn_tocar_musica.setEnabled(true);
+        //btn_tocar_musica.setEnabled(true);
 
     }
 
@@ -91,11 +115,18 @@ public class MusicaFragment extends Fragment implements MediaPlayer.OnPreparedLi
 
                 tocarMusica();
                 //letra.setVisibility(View.INVISIBLE);
-                btn_tocar_musica.setEnabled(false);
+                //btn_tocar_musica.setEnabled(false);
 
             }
 
         };
+
+    }
+
+    @Override
+    public void onTextFinished() {
+
+        etCompleteVerse.setFocusable(true);
 
     }
 

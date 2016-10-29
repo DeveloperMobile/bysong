@@ -2,15 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center_vertical">
 
-    <TextView
+    <bysong.app.visualControls.TextViewAnimated
         android:id="@+id/letra"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:text="@string/refrão"
         android:gravity="center"
+        android:textSize="21sp"
         android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/etCompleteVerse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="continue a letra da música"
+        android:background="@android:drawable/edit_text"/>
 
 </LinearLayout>

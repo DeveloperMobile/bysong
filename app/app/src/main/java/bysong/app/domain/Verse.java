@@ -43,6 +43,21 @@ public class Verse {
 
     }
 
+    public int getIiStartTime() {
+        return iiStartTime;
+    }
+
+    public void setIiStartTime(int iiStartTime) {
+        this.iiStartTime = iiStartTime;
+    }
+
+    public int getIiEndTime() {
+        return iiEndTime;
+    }
+
+    public void setIiEndTime(int iiEndTime) {
+        this.iiEndTime = iiEndTime;
+    }
 
     public int VerseNumber;
 
