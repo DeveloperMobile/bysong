@@ -22,4 +22,11 @@
         android:hint="continue a letra da música"
         android:background="@android:drawable/edit_text"/>
 
+    <Button
+        android:id="@+id/btnNextVerse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Continuar" />
+
 </LinearLayout>

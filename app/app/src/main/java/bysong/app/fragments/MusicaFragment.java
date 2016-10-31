@@ -35,7 +35,7 @@ public class MusicaFragment extends Fragment implements MediaPlayer.OnPreparedLi
     private static final String TAG = "songplayer";
 
     private TextViewAnimated letra;
-    //private Button btn_tocar_musica;
+    private Button btnNextVerse;
     private EditText etCompleteVerse;
     private PlayerMp3 playerMp3;
     private boolean isPlaying;
@@ -47,18 +47,26 @@ public class MusicaFragment extends Fragment implements MediaPlayer.OnPreparedLi
 
         View view = inflater.inflate(R.layout.fragment_musica, container, false);
         song = Parcels.unwrap(getArguments().getParcelable("verso"));
-        etCompleteVerse = (EditText) view.findViewById(R.id.etCompleteVerse);
-        letra = (TextViewAnimated) view.findViewById(R.id.letra);
-        tutorialFromBobMarley();
+        inicializar(view);
+        tutorialFromBobMarley(0, song.getVersesList().getList().get(0).getIiStartTime(),
+                song.getVersesList().getList().get(0).getIiEndTime());
         return view;
 
     }
 
-    private void tutorialFromBobMarley() {
+    private void inicializar(View view) {
+
+        etCompleteVerse = (EditText) view.findViewById(R.id.etCompleteVerse);
+        letra = (TextViewAnimated) view.findViewById(R.id.letra);
+        btnNextVerse = (Button) view.findViewById(R.id.btnNextVerse);
+        btnNextVerse.setOnClickListener(onClickNext());
+
+    }
+
+    private void tutorialFromBobMarley(int id, int startTime, int duration) {
 
         PlayerMp3 playerPreview = new PlayerMp3(this.getContext());
-        playerPreview.playLocalFile(R.raw.bob_marley_is_this_love, song.getVersesList().getList().get(0).getIiStartTime(),
-                song.getVersesList().getList().get(0).getIiEndTime());
+        playerPreview.playLocalFile(R.raw.bob_marley_is_this_love, startTime, duration);
 
         try {
             Thread.sleep(1000);
@@ -67,10 +75,11 @@ public class MusicaFragment extends Fragment implements MediaPlayer.OnPreparedLi
         }
 
         letra.setDelay(300);
-        letra.showTextWordByWord(song.getVersesList().getList().get(0).getOriginalWriting(), this);
+        letra.showTextWordByWord(song.getVersesList().getList().get(id).getOriginalWriting(), this);
+        Log.d("song", song.getVersesList().getList().get(id).getOriginalWriting());
     }
 
-    private void tocarMusica() {
+    /*private void tocarMusica() {
 
         try {
 
@@ -82,7 +91,7 @@ public class MusicaFragment extends Fragment implements MediaPlayer.OnPreparedLi
 
         } catch (IOException e) { e.printStackTrace(); }
 
-    }
+    }*/
 
     @Override
     public void onCompletion(MediaPlayer mediaPlayer) {
@@ -106,16 +115,25 @@ public class MusicaFragment extends Fragment implements MediaPlayer.OnPreparedLi
 
     }
 
-    private View.OnClickListener onClickTocar() {
+    private View.OnClickListener onClickNext() {
 
         return new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
-                tocarMusica();
-                //letra.setVisibility(View.INVISIBLE);
-                //btn_tocar_musica.setEnabled(false);
+                String verso = etCompleteVerse.getText().toString();
+
+                if (song.getVersesList().getList().get(1).getOriginalWriting().equals(verso)) {
+                    tutorialFromBobMarley(1, song.getVersesList().getList().get(1).getIiStartTime(),
+                            song.getVersesList().getList().get(1).getIiEndTime());
+                    btnNextVerse.setText("Continuar");
+
+                } else {
+
+                    btnNextVerse.setText("Tentar Novamente");
+
+                }
 
             }
 

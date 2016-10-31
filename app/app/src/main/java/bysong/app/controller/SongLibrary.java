@@ -20,24 +20,21 @@ public class SongLibrary {
 
     private void SetVersesListTest(Song aoSong) {
 
-        List<Word> loWordsList = new ArrayList<Word>();
+        List<Word> loWordsList = new ArrayList<>();
+        List<Word> soWordsList = new ArrayList<>();
         loWordsList.add(new Word("I", Language.english));
         loWordsList.add(new Word("wanna", Language.english));
         loWordsList.add(new Word("love", Language.english));
         loWordsList.add(new Word("you!", Language.english));
+        soWordsList.add(new Word("and", Language.english));
+        soWordsList.add(new Word("treat", Language.english));
+        soWordsList.add(new Word("you", Language.english));
+        soWordsList.add(new Word("right", Language.english));
 
 
         List<Verse> versesList = new ArrayList<Verse>();
         versesList.add(new Verse(1, loWordsList, 20000, 3300));
-        versesList.add(new Verse(2, loWordsList, 20000, 3300));
-        versesList.add(new Verse(3, loWordsList, 20000, 3300));
-        versesList.add(new Verse(4, loWordsList, 20000, 3300));
-        versesList.add(new Verse(5, loWordsList, 20000, 3300));
-        versesList.add(new Verse(6, loWordsList, 20000, 3300));
-        versesList.add(new Verse(7, loWordsList, 20000, 3300));
-        versesList.add(new Verse(8, loWordsList, 20000, 3300));
-        versesList.add(new Verse(9, loWordsList, 20000, 3300));
-        versesList.add(new Verse(10, loWordsList, 20000, 3300));
+        versesList.add(new Verse(2, soWordsList, 23000, 3300));
         ListVerse listVerse = new ListVerse();
         listVerse.setList(versesList);
         aoSong.setVersesList(listVerse);
